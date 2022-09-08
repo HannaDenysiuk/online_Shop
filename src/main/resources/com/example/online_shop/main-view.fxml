@@ -4,16 +4,49 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" prefHeight="348.0" prefWidth="508.0" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.14-internal" fx:controller="com.example.online_shop.ShopController">
+<VBox alignment="CENTER" prefHeight="418.0" prefWidth="508.0" spacing="20.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.online_shop.ShopController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
    <children>
-      <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
+      <FlowPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <TextField />
+            <Button mnemonicParsing="false" onAction="#addNewProduct" prefHeight="25.0" prefWidth="473.0" text="Add New Product" textAlignment="JUSTIFY">
+               <FlowPane.margin>
+                  <Insets bottom="5.0" />
+               </FlowPane.margin></Button>
+            <Label text="Sort by category:  ">
+               <FlowPane.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </FlowPane.margin></Label>
+            <ComboBox fx:id="comboBoxModel" onAction="#searchByCategory" prefHeight="25.0" prefWidth="373.0">
+               <FlowPane.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </FlowPane.margin></ComboBox>
+            <Label text="enter name of product:  ">
+               <FlowPane.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </FlowPane.margin></Label>
+            <TextField fx:id="keyWord" alignment="CENTER" prefHeight="25.0" prefWidth="244.0">
+               <FlowPane.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </FlowPane.margin></TextField>
+            <Button mnemonicParsing="false" onAction="#searchByName" text="Search Product">
+               <FlowPane.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </FlowPane.margin></Button>
          </children>
-      </HBox>
-      <ListView fx:id="listView" prefHeight="200.0" prefWidth="200.0" />
+         <opaqueInsets>
+            <Insets bottom="50.0" left="5.0" right="5.0" top="5.0" />
+         </opaqueInsets>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </FlowPane>
+      <VBox prefHeight="479.0" prefWidth="473.0">
+         <children>
+            <ListView fx:id="listProducts" prefHeight="317.0" prefWidth="473.0" />
+         </children>
+      </VBox>
    </children>
 </VBox>

@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface IRepository {
     List<Product> getAll();
-    List<Product> getByBrand(String brand);
+    List<Product> searchByName(String name);
     List<Product> getByCategory(String category);
     Boolean addNewProduct(Product product);
 }

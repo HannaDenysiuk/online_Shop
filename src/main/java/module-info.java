@@ -1,6 +1,7 @@
 module com.example.online_shop {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.desktop;
 
 
     opens com.example.online_shop to javafx.fxml;

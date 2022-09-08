@@ -37,16 +37,19 @@ public class ProductRepository implements IRepository{
     }
 
     @Override
-    public List<Product> getByBrand(String brand) {
+    public List<Product> searchByName(String name) {
        return getAll().stream().filter(product -> {
-            return product.getBrand() == brand;
+            return product.getName().contains(name);
         }).toList();
     }
 
     @Override
     public List<Product> getByCategory(String category) {
+        if(category.equals("All"))
+            return getAll().stream().toList();
+        else
         return getAll().stream().filter(product -> {
-            return product.getCategory() == category;
+            return product.getCategory().equals(category);
         }).toList();
     }
 
