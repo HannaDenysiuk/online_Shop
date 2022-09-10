@@ -4,14 +4,17 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" prefHeight="418.0" prefWidth="508.0" spacing="20.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.online_shop.ShopController">
+<VBox alignment="CENTER" prefHeight="418.0" prefWidth="508.0" spacing="20.0"
+      xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.online_shop.ShopController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
    <children>
       <FlowPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#addNewProduct" prefHeight="25.0" prefWidth="473.0" text="Add New Product" textAlignment="JUSTIFY">
+            <Button mnemonicParsing="false" onAction="#addNewProduct" prefHeight="25.0" prefWidth="473.0"
+                    text="Add New Product" textAlignment="JUSTIFY">
                <FlowPane.margin>
                   <Insets bottom="5.0" />
                </FlowPane.margin></Button>

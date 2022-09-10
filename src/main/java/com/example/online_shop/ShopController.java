@@ -7,13 +7,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import javax.swing.*;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,13 +35,13 @@ public class ShopController implements Initializable {
     private IRepository repository;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        repository = new ProductRepository("clothes.data");
+        repository = new ProductRepository();
         updateListView();
         fillComboBox();
         comboBoxModel.getSelectionModel().selectFirst();
     }
 
-    private void fillComboBox(){
+    public void fillComboBox(){
         List<Product> products = repository.getAll();
         List<String> list = new ArrayList<>();
         list.add("All");
@@ -48,43 +53,36 @@ public class ShopController implements Initializable {
         ObservableList<String> list1 = FXCollections.observableList(list);
         comboBoxModel.setItems(list1);
     }
-    private void updateListView() {
+    public void updateListView() {
         List<Product> products = repository.getAll();
         ObservableList<Product> list = FXCollections.observableList(products);
         listProducts.setItems(list);
     }
     @FXML
     public void addNewProduct(ActionEvent actionEvent) {
-        String name = JOptionPane.showInputDialog("name of product");
-        String category = JOptionPane.showInputDialog("category of product");
-        String brand = JOptionPane.showInputDialog("brand of product");
-        String size = JOptionPane.showInputDialog("size of product");
-        String priceS = JOptionPane.showInputDialog("price of product");
-        double price = Double.parseDouble(priceS);
-        int id = 1;
-        try{
-            if(repository.getAll().size() > 0) {
-                id += repository.getAll().stream().mapToInt(c -> c.getId()).max().getAsInt();
-            }
-        }catch (Exception e) {
-            System.out.println(e.getMessage());
+        Stage newWindow = new Stage();
+        FXMLLoader loader = new FXMLLoader(ShopApplication.class.getResource("newProduct-view.fxml"));
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
+        newWindow.setTitle("Add new product");
+        newWindow.setScene(new Scene(root, 250, 220));
 
-        Product product = new Product(id, name, category, brand, size, price);
-
-        if(repository.addNewProduct(product))
-        {
-            updateListView();
-            fillComboBox();
-        }
+        NewProductController secondController = loader.getController();
+        secondController.setRepository(this.repository);
+        secondController.setShopController(this);
+        newWindow.show();
     }
 
 
     public void searchByCategory(ActionEvent actionEvent) {
         String category = comboBoxModel.getSelectionModel().getSelectedItem().toString();
-        System.out.println(category);
+
         List<Product> products = repository.getByCategory(category);
-        System.out.println(products.size());
+
         ObservableList<Product> list = FXCollections.observableList(products);
         listProducts.setItems(list);
     }

@@ -3,7 +3,6 @@ package com.example.online_shop.data;
 import java.io.Serializable;
 
 public class Product implements Serializable {
-    private int id;
     private String name;
     private String category;
     private String brand;
@@ -13,19 +12,13 @@ public class Product implements Serializable {
     public Product() {
     }
 
-    public Product(int id, String name, String category, String brand, String size, Double price) {
-        this.id = id;
+    public Product(String name, String category, String brand, String size, Double price) {
         this.name = name;
         this.category = category;
         this.brand = brand;
         this.size = size;
         this.price = price;
     }
-
-    public int getId() {
-        return id;
-    }
-
     public String getName() {
         return name;
     }
@@ -44,10 +37,6 @@ public class Product implements Serializable {
 
     public Double getPrice() {
         return price;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public void setName(String name) {
